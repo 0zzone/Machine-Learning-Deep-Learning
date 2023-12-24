@@ -15,7 +15,7 @@ notes = dataset.iloc[:, 1] # On récupère les notes
 x_train, x_test, y_train, y_test = train_test_split(heures, notes, test_size=0.3, random_state=0)
 
 plt.scatter(heures, notes, color='red')
-plt.title('Estimation des notes des élèves')
+plt.title('Notes obtenues')
 plt.xlabel('Heures')
 plt.ylabel('Notes')
 
@@ -23,5 +23,7 @@ Regressor = LinearRegression() # On créé l'objet de régression
 Regressor.fit(x_train, y_train) # On entraîne notre jeu de données
 y_pred = Regressor.predict(x_test) # On prédit les valeurs de sortie
 
-plt.plot(x_test, y_pred, color='orange')
+x = np.linspace(1,35)
+y = [Regressor.coef_ * item + Regressor._residues for item in x]
+plt.plot(x, y, color='orange')
 plt.show()
